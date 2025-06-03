@@ -3,7 +3,7 @@ var cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const authRoute = require('./routes/auth');
-const imageRoute = require('./routes/image');
+const photosRoute = require('./routes/photos');
 
 var app = express();
 app.use(express.json());
@@ -33,8 +33,9 @@ app.use(function (req, res, next) {
     next()
 })
 
+
 app.use('/api/auth', authRoute);
-app.use('/api/gallery', imageRoute);
+app.use('/api/photos', photosRoute);
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
