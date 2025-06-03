@@ -1,0 +1,5 @@
+MONGO_URL = mongodb+srv://<username>:<password>@<clusterName>.dpldbsh.mongodb.net/?retryWrites=true&w=majority&appName=<appName>
+ACCESS_TOKEN_SECRET = secret token
+ACCESS_TOKEN_EXPIRY="2d"
+CORS_ORIGIN = "http://localhost:3000"
+PORT = 3000
