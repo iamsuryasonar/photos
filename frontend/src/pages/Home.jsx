@@ -10,7 +10,7 @@ function Home() {
 
     const queryClient = useQueryClient();
 
-    const { data, isLoading, isError: isGetError } = useQuery({
+    const { data: images, isLoading, isError: isGetError } = useQuery({
         queryKey: ['photos'],
         queryFn: fetchPhotos,
     });
@@ -26,11 +26,9 @@ function Home() {
 
     const handleUpload = (file) => {
         mutate({
-            image:file,
+            image: file,
         });
     };
-
-    console.log(data, isLoading);
 
     return (
         <div>
@@ -47,6 +45,14 @@ function Home() {
                 onClose={() => setModalOpen(false)}
                 onUpload={handleUpload}
             />
+
+            <div className="p-6 flex flex-wrap gap-2">
+                {
+                    images && images.map((image) => {
+                        return <img src={image.url} className="w-[200px] h-[200px]" />
+                    })
+                }
+            </div>
         </div>
     )
 }

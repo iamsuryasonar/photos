@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react'
-import { BASE_URL } from '../constants';
+import { BASE_URL, STORAGE_NAME } from '../constants';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 
@@ -35,7 +35,7 @@ function AuthProvider({ children }) {
         axios.post(`${BASE_URL}/api/auth/login`, credentials, {
             "Content-Type": "application/json",
         }).then((result) => {
-            localStorage.setItem('photos_auth', JSON.stringify(result.data.data));
+            localStorage.setItem(STORAGE_NAME, JSON.stringify(result.data.data));
             setToken(result.data.data.token);
             setUser(result.data.data.user);
         }).catch((e) => {
@@ -51,13 +51,13 @@ function AuthProvider({ children }) {
     }
 
     async function logout() {
-        localStorage.removeItem('photos_auth');
+        localStorage.removeItem(STORAGE_NAME);
         setToken(null);
         setUser(null);
     }
 
     useEffect(() => {
-        const data = JSON.parse(localStorage.getItem('photos_auth'));
+        const data = JSON.parse(localStorage.getItem(STORAGE_NAME));
 
         if (data) {
             setToken(data.token);

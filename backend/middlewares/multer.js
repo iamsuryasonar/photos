@@ -1,10 +1,9 @@
 const multer = require('multer');
 
 let upload = multer({
-    dest: 'uploads/',
-    limits: 1024 * 1024 * 50,
+    limits: 1024 * 1024 * 10,
     fileFilter: function (req, file, next) {
-        if (file.mimetype) {
+        if (file.mimetype.startsWith('image/')) {
             next(null, true)
         } else {
             next('File type not supported!', false)
